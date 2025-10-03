@@ -16,6 +16,7 @@
       padding: 8px 12px;
       border-radius: 8px;
       z-index: 100;
+      text-align: center;
     }
     #ar-button {
       position: fixed;
@@ -35,10 +36,9 @@
 </head>
 <body>
   <div id="info">Move your phone to detect a plane and tap to place the dish</div>
-  <a id="ar-button" href="croissant.usdz" rel="ar" target="_blank">View Dish in AR</a>
+  <a id="ar-button" href="" rel="ar" target="_blank">View Dish in AR</a>
 
   <a-scene id="scene" vr-mode-ui="enabled: false" embedded xrweb background="color: #ECECEC">
-    <!-- Camera for AR -->
     <a-entity camera look-controls></a-entity>
 
     <!-- Reticle for placement -->
@@ -54,22 +54,35 @@
   </a-scene>
 
   <script>
+    // --- Helper to read URL parameters ---
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
     const ua = navigator.userAgent;
     const isIOS = /iPhone|iPad|iPod/i.test(ua);
     const arButton = document.getElementById('ar-button');
+    const info = document.getElementById('info');
     const scene = document.getElementById('scene');
     const reticle = document.getElementById('reticle');
     const dish = document.getElementById('dish');
     let placed = false;
 
-    // --- Dish configuration ---
-    const dishConfig = {
-      glb: "croissant.glb",   // Android GLB
-      usdz: "croissant.usdz", // iOS USDZ
-      scale: 0.001            // tweak for Android GLB
+    // --- Dishes configuration ---
+    const dishes = {
+      croissant: { glb: 'croissant.glb', usdz: 'croissant.usdz', scale: 0.001 },
+      pizza: { glb: 'pizza.glb', usdz: 'pizza.usdz', scale: 0.002 },
+      coffee: { glb: 'coffee.glb', usdz: 'coffee.usdz', scale: 0.0015 }
     };
 
-    if (isIOS) {
+    // Get selected dish from URL parameter
+    const dishName = getQueryParam('dish') || 'croissant';
+    const dishConfig = dishes[dishName];
+
+    if (!dishConfig) {
+      info.innerText = "Dish not found.";
+    } else if (isIOS) {
       // iOS Quick Look
       arButton.href = dishConfig.usdz;
       arButton.style.display = "block";
@@ -109,7 +122,6 @@
             dish.object3D.position.copy(reticle.object3D.position);
             dish.object3D.rotation.set(0, Math.PI, 0);
 
-            // Apply scale after model loads
             dish.addEventListener('model-loaded', function onLoad() {
               dish.object3D.scale.set(
                 dishConfig.scale,
@@ -134,11 +146,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
