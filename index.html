@@ -64,7 +64,7 @@
 
     // Per-dish scale (Android GLB)
     const dishScales = {
-      "dish": 0.01 // 1% of original size, tweak per dish
+      "croissant": 0.01 // 1% of original size, tweak per dish
         // Add more dishes here: "pizza": 0.02, "burger": 0.015, etc.
     };
 
@@ -99,15 +99,16 @@
         // Tap to place GLB model
         scene.addEventListener('click', () => {
           if (!placed) {
-            const dishName = "dish"; // chagne this per selected dish
-            dish.setAttribute('gltf-model', 'url(croissant.glb)');
+            const dishName = "croissant"; // change this per selected dish
+            dish.setAttribute('gltf-model', 'url(${dishName}.glb)');
             dish.object3D.position.copy(reticle.object3D.position);
             dish.object3D.rotation.set(0, Math.PI, 0);
 
             // Apply per-dish scale after model loads
-            dish.addEventListener('model-loaded', () => {
+            dish.addEventListener('model-loaded', function onLoad() {
               const scale = dishScales[dishName] || 0.01;
               dish.object3D.scale.set(scale, scale, scale);
+              dish.removeEventListener('model-loaded', onLoad); //prevent multiple triggers
             });
             
             placed = true;
@@ -124,6 +125,7 @@
   </script>
 </body>
 </html>
+
 
 
 
