@@ -62,16 +62,18 @@
     const dish = document.getElementById('dish');
     let placed = false;
 
-    // Per-dish scale (Android GLB)
-    const dishScales = {
-      "croissant": 0.01 // 1% of original size, tweak per dish
-        // Add more dishes here: "pizza": 0.02, "burger": 0.015, etc.
+    // --- Dish configuration ---
+    const dishConfig = {
+      glb: "croissant.glb",   // Android GLB
+      usdz: "croissant.usdz", // iOS USDZ
+      scale: 0.001            // tweak for Android GLB
     };
 
     if (isIOS) {
-      // Show AR Quick Look button
-      arButton.style.display = 'block';
-      document.getElementById('info').innerText = "Tap the button to view the dish in AR on your table.";
+      // iOS Quick Look
+      arButton.href = dishConfig.usdz;
+      arButton.style.display = "block";
+      info.innerText = "Tap the button to view the dish in AR on your table.";
     } else if (navigator.xr) {
       // Android / WebXR markerless AR
       navigator.xr.requestSession('immersive-ar', { requiredFeatures: ['hit-test'] })
@@ -89,7 +91,11 @@
               if (hitTestResults.length > 0 && !placed) {
                 const hit = hitTestResults[0];
                 const pose = hit.getPose(referenceSpace);
-                reticle.object3D.position.set(pose.transform.position.x, pose.transform.position.y, pose.transform.position.z);
+                reticle.object3D.position.set(
+                  pose.transform.position.x,
+                  pose.transform.position.y,
+                  pose.transform.position.z
+                );
                 reticle.object3D.visible = true;
               }
             });
@@ -99,32 +105,36 @@
         // Tap to place GLB model
         scene.addEventListener('click', () => {
           if (!placed) {
-            const dishName = "croissant"; // change this per selected dish
-            dish.setAttribute('gltf-model', 'url(${dishName}.glb)');
+            dish.setAttribute('gltf-model', `url(${dishConfig.glb})`);
             dish.object3D.position.copy(reticle.object3D.position);
             dish.object3D.rotation.set(0, Math.PI, 0);
 
-            // Apply per-dish scale after model loads
+            // Apply scale after model loads
             dish.addEventListener('model-loaded', function onLoad() {
-              const scale = dishScales[dishName] || 0.01;
-              dish.object3D.scale.set(scale, scale, scale);
-              dish.removeEventListener('model-loaded', onLoad); //prevent multiple triggers
+              dish.object3D.scale.set(
+                dishConfig.scale,
+                dishConfig.scale,
+                dishConfig.scale
+              );
+              dish.removeEventListener('model-loaded', onLoad);
             });
-            
+
             placed = true;
             reticle.object3D.visible = false;
           }
         });
+
       }).catch(e => {
         console.log("WebXR not supported:", e);
-        document.getElementById('info').innerText = "WebXR not supported on this device.";
+        info.innerText = "WebXR not supported on this device.";
       });
     } else {
-      document.getElementById('info').innerText = "AR not supported on this device/browser.";
+      info.innerText = "AR not supported on this device/browser.";
     }
   </script>
 </body>
 </html>
+
 
 
 
