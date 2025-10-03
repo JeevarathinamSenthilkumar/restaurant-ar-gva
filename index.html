@@ -62,6 +62,12 @@
     const dish = document.getElementById('dish');
     let placed = false;
 
+    // Per-dish scale (Android GLB)
+    const dishScales = {
+      "dish": 0.01 // 1% of original size, tweak per dish
+        // Add more dishes here: "pizza": 0.02, "burger": 0.015, etc.
+    };
+
     if (isIOS) {
       // Show AR Quick Look button
       arButton.style.display = 'block';
@@ -93,10 +99,17 @@
         // Tap to place GLB model
         scene.addEventListener('click', () => {
           if (!placed) {
+            const dishName = "dish"; // chagne this per selected dish
             dish.setAttribute('gltf-model', 'url(croissant.glb)');
             dish.object3D.position.copy(reticle.object3D.position);
             dish.object3D.rotation.set(0, Math.PI, 0);
-            dish.object3D.scale.set(0.05, 0.05, 0.05);
+
+            // Apply per-dish scale after model loads
+            dish.addEventListener('model-loaded', () => {
+              const scale = dishScales[dishName] || 0.01;
+              dish.object3D.scale.set(scale, scale, scale);
+            });
+            
             placed = true;
             reticle.object3D.visible = false;
           }
@@ -111,5 +124,6 @@
   </script>
 </body>
 </html>
+
 
 
