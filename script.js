@@ -30,5 +30,6 @@ searchInput.addEventListener("input", e => {
 
 // Open AR Link
 function openARLink() {
-  window.open("https://your-ar-link-here.com", "_blank");
+  window.open("https://jeevarathinamsenthilkumar.github.io/restaurant-ar-gva/index.html?dish=pizza", "_blank");
 }
+
