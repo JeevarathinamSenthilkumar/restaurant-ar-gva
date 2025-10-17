@@ -6,7 +6,10 @@
   <title>Restaurant AR Menu</title>
 
   <!-- Tailwind CSS CDN -->
+   <script>tailwind.config = {plugins: [tailwindcssLineClamp],} </script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/line-clamp@0.4.4"></script>
+
 
   <!-- Google Model Viewer -->
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -66,13 +69,16 @@
           class="w-full h-64 rounded-2xl bg-gray-50 my-2">
         </model-viewer>
 
-        <div class="flex justify-between items-center mt-2">
-          <div>
-            <h2 class="text-lg font-semibold text-gray-800">La Mucca Ballerina</h2>
-            <p class="text-sm text-gray-500">Flaky croissant layered with almond cream, fresh berries, and a dusting of powdered sugar</p>
-          </div>
-          <span class="text-lg font-semibold text-gray-800">$18.99</span>
+        <div class="flex justify-between items-start mt-2">
+            <div class="flex-1 pr-3 min-w-0">
+                <h2 class="text-base font-semibold text-gray-800 truncate">La Mucca Ballerina</h2>
+                <p class="text-sm text-gray-500 leading-snug line-clamp-2">
+                    Flaky croissant layered with almond cream, fresh berries, and a dusting of powdered sugar
+                </p>
+            </div>
+            <span class="text-base font-semibold text-gray-800 whitespace-nowrap ml-2">$18.99</span>
         </div>
+
 
         <div class="flex justify-between items-center mt-3">
           <div class="flex items-center space-x-1">
