@@ -75,6 +75,15 @@ body {
   object-fit: contain;
 }
 
+/* ======== HIDE BUILT-IN AR BUTTON FROM <model-viewer> ======== */
+model-viewer::part(ar-button) {
+  display: none !important;
+}
+
+model-viewer::part(default-progress-bar) {
+  display: none !important; /* optional: removes loading bar */
+}
+
 /* ========= SCROLL BAR ========= */
 ::-webkit-scrollbar {
   height: 6px;
