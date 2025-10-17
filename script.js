@@ -1,15 +1,31 @@
-// Filtering logic
+// ======== AR ACTIVATION FUNCTION ========
+// Trigger AR mode for a given model-viewer element
+function activateAR(modelId) {
+  const modelViewer = document.getElementById(modelId);
+
+  if (modelViewer && modelViewer.canActivateAR) {
+    modelViewer.activateAR(); // Opens AR Quick Look (iOS) or Scene Viewer (Android)
+  } else {
+    alert("AR mode is not available on this device.");
+  }
+}
+
+
+
+// ======== MENU FILTERING ========
 const filterButtons = document.querySelectorAll(".filter-btn");
 const menuCards = document.querySelectorAll(".menu-card");
-const searchInput = document.getElementById("searchInput");
 
-filterButtons.forEach(btn => {
+// Add click events for filter buttons
+filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
-    document.querySelector(".filter-btn.active").classList.remove("active");
+    // Remove active class from all
+    document.querySelector(".filter-btn.active")?.classList.remove("active");
     btn.classList.add("active");
 
     const category = btn.getAttribute("data-category");
-    menuCards.forEach(card => {
+
+    menuCards.forEach((card) => {
       if (category === "all" || card.dataset.category === category) {
         card.style.display = "block";
       } else {
@@ -19,16 +35,34 @@ filterButtons.forEach(btn => {
   });
 });
 
-// Search filter
-searchInput.addEventListener("input", e => {
-  const searchTerm = e.target.value.toLowerCase();
-  menuCards.forEach(card => {
-    const name = card.dataset.name.toLowerCase();
-    card.style.display = name.includes(searchTerm) ? "block" : "none";
+
+
+// ======== SEARCH FILTER ========
+const searchInput = document.getElementById("searchInput");
+
+if (searchInput) {
+  searchInput.addEventListener("input", (e) => {
+    const searchTerm = e.target.value.toLowerCase();
+    menuCards.forEach((card) => {
+      const name = card.dataset.name?.toLowerCase() || "";
+      card.style.display = name.includes(searchTerm) ? "block" : "none";
+    });
+  });
+}
+
+
+
+// ======== SMOOTH SCROLL TO TOP WHEN FILTER CHANGES ========
+filterButtons.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   });
 });
 
-// Open AR Link
-function openARLink() {
-  window.open("https://your-ar-link-here.com", "_blank");
-}
+
+
+// ======== OPTIONAL: LOG FOR DEBUGGING ========
+console.log("Restaurant AR Menu script loaded successfully 🍽️");
