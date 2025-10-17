@@ -83,16 +83,3 @@ body {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 9999px;
 }
-
-/* ======== HIDE BUILT-IN AR BUTTON FROM <model-viewer> ======== */
-model-viewer::part(ar-button) {
-  display: none !important;
-}
-
-model-viewer::part(ar-prompt) {
-  display:non !important;
-}
-
-model-viewer::part(default-progress-bar) {
-  display: none !important; /* optional: removes loading bar */
-}
