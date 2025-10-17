@@ -4,6 +4,13 @@ body {
   background: #f9fafb;
 }
 
+/* Optional: Glassy Search Bar */
+input#searchInput {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
 /* ========= GLASSY FILTER BUTTONS ========= */
 .filter-btn {
   position: relative;
@@ -96,6 +103,9 @@ model-viewer {
         object-fit: contain;
         filter: none; /* keep original icon colors */
     }
+
+
+
 
 /* ========= SCROLL BAR ========= */
 ::-webkit-scrollbar {
