@@ -53,13 +53,13 @@
   <div class="w-full flex justify-center">
     <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-6xl">
 
-      <!-- 🍕 Pizza -->
-      <div class="menu-card" data-category="main" data-name="pizza">
+      <!-- La Mucca Ballerina -->
+      <div class="menu-card" data-category="main" data-name="La Mucca Ballerina">
         <model-viewer 
-          id="pizzaModel"
+          id="LaMuccaBallerinaModel"
           src="android-3D-models/pizza.glb"
           ios-src="iOS-3D-models/pizza.usdz"
-          alt="Pizza 3D model"
+          alt="La Mucca Ballerina 3D model"
           auto-rotate
           camera-controls
           ar
@@ -70,10 +70,10 @@
 
         <div class="flex justify-between items-center mt-2">
           <div>
-            <h2 class="text-lg font-semibold text-gray-800">Pizza Margherita</h2>
-            <p class="text-sm text-gray-500">Classic cheese & tomato</p>
+            <h2 class="text-lg font-semibold text-gray-800">La Mucca Ballerina</h2>
+            <p class="text-sm text-gray-500">Flaky croissant layered with almond cream, fresh berries, and a dusting of powdered sugar</p>
           </div>
-          <span class="text-lg font-semibold text-gray-800">$12</span>
+          <span class="text-lg font-semibold text-gray-800">$18.99</span>
         </div>
 
         <div class="flex justify-between items-center mt-3">
@@ -82,7 +82,7 @@
             <span class="text-gray-700 font-medium">4.8</span>
           </div>
           <button 
-            onclick="activateAR('pizzaModel')"
+            onclick="activateAR('LaMuccaBallerinaModel')"
             class="view-btn">
             <img src="images/ARIcon.png" alt="AR icon" class="ar-icon">
             View on your table
@@ -90,13 +90,13 @@
         </div>
       </div>
 
-      <!-- 🍝 Pasta -->
-      <div class="menu-card" data-category="main" data-name="pasta">
+      <!-- Salmon Tartine -->
+      <div class="menu-card" data-category="main" data-name="Salman Tartine">
         <model-viewer 
-          id="pastaModel"
-          src="android-3D-models/pasta.glb"
-          ios-src="iOS-3D-models/pasta.usdz"
-          alt="Pasta 3D model"
+          id="SalmonTartineModel"
+          src="android-3D-models/salmon_tartine.glb"
+          ios-src="iOS-3D-models/Salmon_tartine.usdz"
+          alt="Salmon Tartine 3D model"
           auto-rotate
           camera-controls
           ar
@@ -107,10 +107,10 @@
 
         <div class="flex justify-between items-center mt-2">
           <div>
-            <h2 class="text-lg font-semibold text-gray-800">Pasta Alfredo</h2>
-            <p class="text-sm text-gray-500">Creamy Italian delight</p>
+            <h2 class="text-lg font-semibold text-gray-800">Salmon Tartine</h2>
+            <p class="text-sm text-gray-500">Grilled sourdough topped with smoked salmon, cream cheese, capers, and fresh dill</p>
           </div>
-          <span class="text-lg font-semibold text-gray-800">$14</span>
+          <span class="text-lg font-semibold text-gray-800">$15</span>
         </div>
 
         <div class="flex justify-between items-center mt-3">
@@ -119,7 +119,7 @@
             <span class="text-gray-700 font-medium">4.9</span>
           </div>
           <button 
-            onclick="activateAR('pastaModel')"
+            onclick="activateAR('SalmonTartineModel')"
             class="view-btn">
             <img src="images/ARIcon.png" alt="AR icon" class="ar-icon">
             View on your table
@@ -127,13 +127,13 @@
         </div>
       </div>
 
-      <!-- 🍰 Dessert -->
-      <div class="menu-card" data-category="dessert" data-name="tiramisu">
+      <!-- Dessert -->
+      <div class="menu-card" data-category="dessert" data-name="Raspberries Tart">
         <model-viewer 
-          id="dessertModel"
-          src="android-3D-models/dessert.glb"
-          ios-src="iOS-3D-models/dessert.usdz"
-          alt="Tiramisu 3D model"
+          id="RaspberriesTartModel"
+          src="android-3D-models/raspberries_tart.glb"
+          ios-src="iOS-3D-models/raspberries_tart.usdz"
+          alt="Raspberries Tart 3D model"
           auto-rotate
           camera-controls
           ar
@@ -144,10 +144,10 @@
 
         <div class="flex justify-between items-center mt-2">
           <div>
-            <h2 class="text-lg font-semibold text-gray-800">Tiramisu</h2>
-            <p class="text-sm text-gray-500">Coffee-flavored Italian dessert</p>
+            <h2 class="text-lg font-semibold text-gray-800">Raspberries Tart</h2>
+            <p class="text-sm text-gray-500">Buttery tart shell filled with vanilla custard and topped with fresh raspberries and a light glaze</p>
           </div>
-          <span class="text-lg font-semibold text-gray-800">$9</span>
+          <span class="text-lg font-semibold text-gray-800">$13.99</span>
         </div>
 
         <div class="flex justify-between items-center mt-3">
@@ -156,7 +156,44 @@
             <span class="text-gray-700 font-medium">4.7</span>
           </div>
           <button 
-            onclick="activateAR('dessertModel')"
+            onclick="activateAR('RaspberriesTartModel')"
+            class="view-btn">
+            <img src="images/ARIcon.png" alt="AR icon" class="ar-icon">
+            View on your table
+          </button>
+        </div>
+      </div>
+
+      <!-- Drink -->
+      <div class="menu-card" data-category="dessert" data-name="Vienna Coffee">
+        <model-viewer 
+          id="ViennaCoffeeModel"
+          src="android-3D-models/Vienna_coffee.glb"
+          ios-src="iOS-3D-models/Vienna_coffee.usdz"
+          alt="Vienna Coffee 3D model"
+          auto-rotate
+          camera-controls
+          ar
+          ar-modes="webxr scene-viewer quick-look"
+          ar-scale="fixed"
+          class="w-full h-64 rounded-2xl bg-gray-50 my-2">
+        </model-viewer>
+
+        <div class="flex justify-between items-center mt-2">
+          <div>
+            <h2 class="text-lg font-semibold text-gray-800">Vienna Coffee</h2>
+            <p class="text-sm text-gray-500">Rich espresso blended with whipped cream and a hint of chocolate, served warm in a classic cup</p>
+          </div>
+          <span class="text-lg font-semibold text-gray-800">$8</span>
+        </div>
+
+        <div class="flex justify-between items-center mt-3">
+          <div class="flex items-center space-x-1">
+            <span class="text-yellow-500 text-lg">★</span>
+            <span class="text-gray-700 font-medium">4.7</span>
+          </div>
+          <button 
+            onclick="activateAR('ViennaCoffeeModel')"
             class="view-btn">
             <img src="images/ARIcon.png" alt="AR icon" class="ar-icon">
             View on your table
