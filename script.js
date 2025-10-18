@@ -4,23 +4,14 @@ function activateAR(modelId) {
   const modelViewer = document.getElementById(modelId);
   if (!modelViewer) return;
 
-  const iosSrc = modelViewer.getAttribute("ios-src");
-  const androidSrc = modelViewer.getAttribute("src");
-
-  const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-  const isAndroid = /Android/i.test(navigator.userAgent);
-
-  if (isiOS && iosSrc) {
-    // Launch Apple Quick Look
-    window.location.href = iosSrc;
-  } else if (isAndroid && androidSrc) {
-    // Launch Google Scene Viewer
-    const sceneViewerUrl = `intent://${window.location.host}/${androidSrc}#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;S.browser_fallback_url=${window.location.href};end;`;
-    window.location.href = sceneViewerUrl;
+  // Check if the browser supports AR through model-viewer
+  if (modelViewer.canActivateAR) {
+    modelViewer.activateAR(); // ✅ Same as clicking the built-in AR icon
   } else {
-    alert("AR mode is available only on mobile devices.");
+    alert("AR mode is not available on this device.");
   }
 }
+
 
 
 // ======== MENU FILTERING ========

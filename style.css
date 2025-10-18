@@ -83,3 +83,11 @@ body {
   background: rgba(0, 0, 0, 0.1);
   border-radius: 9999px;
 }
+
+/* ========= HIDE AR ICON ON 3D VIEWER ========= */
+model-viewer::part(ar-button),
+model-viewer::part(ar-prompt),
+model-viewer::part(default-progress-bar) {
+  display: none !important;
+}
+
