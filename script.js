@@ -12,21 +12,48 @@ function activateAR(modelId) {
   }
 }
 
-window.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll("model-viewer").forEach((mv) => {
-    const hideArUi = () => {
-      const shadow = mv.shadowRoot;
-      if (!shadow) return;
-      const arBtn = shadow.querySelector("button[slot='ar-button']");
-      const prompt = shadow.querySelector(".ar-prompt");
-      if (arBtn) arBtn.style.display = "none";
-      if (prompt) prompt.style.display = "none";
-    };
-    hideArUi();
-    setTimeout(hideArUi, 1000);
-    setTimeout(hideArUi, 2500);
-  });
+// ======== FORCE HIDE AR BUTTON ON iOS SAFARI ========
+window.addEventListener("load", () => {
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  if (isIOS) {
+    const modelViewers = document.querySelectorAll("model-viewer");
+
+    modelViewers.forEach((mv) => {
+      // Function to hide built-in AR UI
+      const hideArUi = () => {
+        const shadow = mv.shadowRoot;
+        if (!shadow) return;
+
+        const arBtn = shadow.querySelector("button[slot='ar-button']");
+        const prompt = shadow.querySelector(".ar-prompt");
+        const progress = shadow.querySelector("progress");
+
+        if (arBtn) {
+          arBtn.style.display = "none";
+          arBtn.style.opacity = "0";
+          arBtn.style.visibility = "hidden";
+        }
+
+        if (prompt) {
+          prompt.style.display = "none";
+          prompt.style.opacity = "0";
+        }
+
+        if (progress) {
+          progress.style.display = "none";
+        }
+      };
+
+      // Run multiple times because Safari may delay rendering the button
+      hideArUi();
+      setTimeout(hideArUi, 1000);
+      setTimeout(hideArUi, 2500);
+      setTimeout(hideArUi, 5000);
+    });
+  }
 });
+
 
 // ======== MENU FILTERING ========
 const filterButtons = document.querySelectorAll(".filter-btn");
