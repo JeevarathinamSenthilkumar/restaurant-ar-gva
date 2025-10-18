@@ -1,7 +1,8 @@
 /* ========= GLOBAL ========= */
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #dbeafe, #f1f5f9);
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+  color: #fff;
 }
 div[role="filter-bar"] {
   background: transparent;
