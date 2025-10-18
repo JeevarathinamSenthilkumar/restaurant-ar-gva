@@ -54,12 +54,12 @@ window.addEventListener("load", () => {
   }
 });
 
-
-// ======== MENU FILTERING ========
+// ======== MENU FILTERING WITH EMPTY STATE ========
 const filterButtons = document.querySelectorAll(".filter-btn");
 const menuCards = document.querySelectorAll(".menu-card");
+const emptyMessage = document.getElementById("emptyMessage");
 
-// Add click events for filter buttons
+// Filter menu based on category
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
     // Remove active class from all
@@ -67,14 +67,28 @@ filterButtons.forEach((btn) => {
     btn.classList.add("active");
 
     const category = btn.getAttribute("data-category");
+    let visibleCount = 0;
 
     menuCards.forEach((card) => {
       if (category === "all" || card.dataset.category === category) {
         card.style.display = "block";
+        visibleCount++;
       } else {
         card.style.display = "none";
       }
     });
+
+    // Show or hide "Chef preparing" message
+    if (emptyMessage) {
+      if (visibleCount === 0) {
+        emptyMessage.classList.remove("hidden");
+      } else {
+        emptyMessage.classList.add("hidden");
+      }
+    }
+
+    // Smooth scroll to top when filter changes
+    window.scrollTo({ top: 0, behavior: "smooth" });
   });
 });
 
@@ -84,22 +98,25 @@ const searchInput = document.getElementById("searchInput");
 if (searchInput) {
   searchInput.addEventListener("input", (e) => {
     const searchTerm = e.target.value.toLowerCase();
+    let visibleCount = 0;
+
     menuCards.forEach((card) => {
       const name = card.dataset.name?.toLowerCase() || "";
-      card.style.display = name.includes(searchTerm) ? "block" : "none";
+      const matches = name.includes(searchTerm);
+      card.style.display = matches ? "block" : "none";
+      if (matches) visibleCount++;
     });
+
+    // Show or hide empty message for search
+    if (emptyMessage) {
+      if (visibleCount === 0) {
+        emptyMessage.classList.remove("hidden");
+      } else {
+        emptyMessage.classList.add("hidden");
+      }
+    }
   });
 }
-
-// ======== SMOOTH SCROLL TO TOP WHEN FILTER CHANGES ========
-filterButtons.forEach((btn) => {
-  btn.addEventListener("click", () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  });
-});
 
 // ======== OPTIONAL: LOG FOR DEBUGGING ========
 console.log("Restaurant AR Menu script loaded successfully 🍽️");
