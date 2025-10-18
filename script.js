@@ -12,7 +12,21 @@ function activateAR(modelId) {
   }
 }
 
-
+window.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("model-viewer").forEach((mv) => {
+    const hideArUi = () => {
+      const shadow = mv.shadowRoot;
+      if (!shadow) return;
+      const arBtn = shadow.querySelector("button[slot='ar-button']");
+      const prompt = shadow.querySelector(".ar-prompt");
+      if (arBtn) arBtn.style.display = "none";
+      if (prompt) prompt.style.display = "none";
+    };
+    hideArUi();
+    setTimeout(hideArUi, 1000);
+    setTimeout(hideArUi, 2500);
+  });
+});
 
 // ======== MENU FILTERING ========
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -37,8 +51,6 @@ filterButtons.forEach((btn) => {
   });
 });
 
-
-
 // ======== SEARCH FILTER ========
 const searchInput = document.getElementById("searchInput");
 
@@ -52,8 +64,6 @@ if (searchInput) {
   });
 }
 
-
-
 // ======== SMOOTH SCROLL TO TOP WHEN FILTER CHANGES ========
 filterButtons.forEach((btn) => {
   btn.addEventListener("click", () => {
@@ -63,8 +73,6 @@ filterButtons.forEach((btn) => {
     });
   });
 });
-
-
 
 // ======== OPTIONAL: LOG FOR DEBUGGING ========
 console.log("Restaurant AR Menu script loaded successfully 🍽️");
