@@ -12,6 +12,7 @@ function activateAR(modelId) {
   }
 }
 
+/*
 // ======== FORCE HIDE AR BUTTON ON iOS SAFARI ========
 window.addEventListener("load", () => {
   const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
@@ -53,6 +54,7 @@ window.addEventListener("load", () => {
     });
   }
 });
+*/
 
 // ======== MENU FILTERING WITH EMPTY STATE ========
 const filterButtons = document.querySelectorAll(".filter-btn");
@@ -120,3 +122,4 @@ if (searchInput) {
 
 // ======== OPTIONAL: LOG FOR DEBUGGING ========
 console.log("Restaurant AR Menu script loaded successfully 🍽️");
+
