@@ -146,22 +146,6 @@ div[role="filter-bar"] {
   border-radius: 9999px;
 }
 
-/* ========= HIDE AR ICON ON 3D VIEWER =========
-model-viewer::part(ar-button),
-model-viewer::part(ar-prompt),
-model-viewer::part(default-progress-bar) {
-  display: none !important;
-  opacity: 0 !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-*/
-
-/* Extra safety: directly hide internal shadow elements on iOS Safari 
-model-viewer {
-  --ar-button-display: none !important;
-}
-*/
 /* ========= Soft-fade-in animation ========= */
 #emptyMessage {
   animation: fadeIn 0.4s ease forwards;
@@ -179,6 +163,7 @@ model-viewer {
   font-size: 1.125rem; /* same as text-lg */
   transition: opacity 0.3s ease;
 }
+
 
 
 
